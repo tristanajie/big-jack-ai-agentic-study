@@ -1,0 +1,15 @@
+<< Setup Backend >>
+
+python -m venv venv
+venv\Scripts\activate
+pip install fastapi uvicorn python-multipart python-dotenv
+pip install openai python-dotenv
+touch main.py
+
+uvicorn app.main:app --reload // buat run program
+
+<< / >>
+
+<< LLM Model >>
+
+https://openrouter.ai
