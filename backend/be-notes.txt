@@ -8,7 +8,7 @@ touch main.py
 
 uvicorn app.main:app --reload // buat run program
 
-<< / >>
+<< /Setup Backend >>
 
 << LLM Model >>
 
@@ -21,4 +21,7 @@ https://openrouter.ai
 
 !! IMPORTANT !!
 
-AI API Key must be set locally for security reasons such as Token Abuse that could lead to unwanted charges to OpenRouter Users. Please understand this message!
+AI API Key must be set locally for security reasons such as Token Abuse that could lead to unwanted charges to OpenRouter Users. 
+Please understand this message!
+
+<< /LLM Model >>
