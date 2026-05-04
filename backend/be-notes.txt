@@ -13,3 +13,12 @@ uvicorn app.main:app --reload // buat run program
 << LLM Model >>
 
 https://openrouter.ai
+
+- Go to Workspace
+- Create API Key
+- Copy Key and adjust the .env
+- Keep LLM_MODEL=tencent/hy3-preview:free and APP_NAME=AI Study Assistant
+
+!! IMPORTANT !!
+
+AI API Key must be set locally for security reasons such as Token Abuse that could lead to unwanted charges to OpenRouter Users. Please understand this message!
