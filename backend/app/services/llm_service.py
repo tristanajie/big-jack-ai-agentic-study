@@ -25,17 +25,35 @@ def call_llm(prompt: str) -> str:
     """Call OpenRouter LLM with the given prompt"""
     try:
         model = os.getenv("LLM_MODEL", "openai/gpt-3.5-turbo")
+        print(f"🔍 Using model: {model}")
+        print(f"🔍 API Key set: {bool(api_key)}")
         
         response = client.chat.completions.create(
             model=model,
             messages=[
-                {"role": "system", "content": "You are a helpful study assistant. Always respond in English."},
+                {"role": "system", "content": "You are a helpful study assistant. Respond concisely."},
                 {"role": "user", "content": prompt}
             ],
             temperature=0.7,
-            max_tokens=2000
+            max_tokens=4000
         )
-        return response.choices[0].message.content
+        
+        print(f"✅ Response received")
+        print(f"   - finish_reason: {response.choices[0].finish_reason}")
+        
+        content = response.choices[0].message.content
+        if content is None:
+            print("⚠️ LLM returned None content!")
+            # Fallback ke reasoning jika ada
+            if hasattr(response.choices[0].message, 'reasoning') and response.choices[0].message.reasoning:
+                print("📝 Using reasoning as fallback content")
+                content = response.choices[0].message.reasoning[:1000]  # Return first 1000 chars of reasoning
+            else:
+                raise ValueError("LLM response content is None and no reasoning available")
+        
+        return content
     except Exception as e:
-        print(f"⚠️ LLM Error: {str(e)}")
-        raise RuntimeError("Gagal memproses permintaan ke LLM. Coba lagi nanti.")
+        print(f"❌ LLM Error: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        raise RuntimeError(f"Gagal memproses permintaan ke LLM: {str(e)}")

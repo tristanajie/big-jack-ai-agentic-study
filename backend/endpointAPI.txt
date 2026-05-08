@@ -2,6 +2,7 @@
 
 GET http://127.0.0.1:8000/health
 
+// SKENARIO: Without Upload pdf
 POST http://127.0.0.1:8000/api/summarize
 {
     "text" : "Joko Widodo (Indonesia: [dʒɔkɔ widɔdɔ]; lahir 21 Juni 1961), lebih dikenal sebagai Jokowi adalah politikus dan pengusaha Indonesia yang menjabat sebagai Presiden Indonesia ketujuh dari tahun 2014 sampai 2024. Sebelumnya ia adalah anggota Partai Demokrasi Indonesia Perjuangan (PDI-P). Ia adalah presiden Indonesia pertama yang bukan berasal dari elit politik atau militer dan menjadi presiden Indonesia pertama yang sebelumnya menjabat sebagai kepala daerah, di mana ia menjabat sebagai Gubernur DKI Jakarta dari tahun 2012 hingga 2014 dan Wali kota Kota Surakarta dari tahun 2005 hingga 2012."
@@ -16,4 +17,26 @@ POST http://127.0.0.1:8000/qa
 {
     "context" : "Indonesia.",
     "question" : "Siapa President indonesia?"
+}
+
+
+// SKENARIO: with PDF upload (cant process big pdf file, pls use smaller files)
+
+POST http://127.0.0.1:8000/upload
+Body: form-data
+Key: file
+Type: file
+Value: PDF
+
+POST http://127.0.0.1:8000/api/summarize (no body req)
+
+POST http://127.0.0.1:8000/quiz
+{
+    "text" : "Fotosintesis adalah proses yang dilakukan tumbuhan menggunakan cahaya matahari untuk mengubah air dan CO2 menjadi glukosa dan oksigen. Proses ini terjadi di kloroplas dan menghasilkan energi untuk pertumbuhan tumbuhan."
+}
+
+POST http://127.0.0.1:8000/qa
+{
+    "context" : "Jokowi",
+    "question" : "Question about document in pdf?"
 }

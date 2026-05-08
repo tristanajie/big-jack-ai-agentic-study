@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routes import summarize
 from app.routes import qa
 from app.routes import quiz
+from app.routes import upload
 
 app = FastAPI(
     title="AI Study Assistant API",
@@ -12,6 +13,7 @@ app = FastAPI(
 
 app.include_router(quiz.router)
 app.include_router(qa.router)
+app.include_router(upload.router)
 
 # Add CORS middleware
 app.add_middleware(

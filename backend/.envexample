@@ -1,0 +1,8 @@
+# OpenRouter API Configuration
+OPENROUTER_API_KEY=
+
+# Model Configuration (OpenRouter models)
+LLM_MODEL=tencent/hy3-preview:free
+
+# App Config
+APP_NAME=AI Study Assistant

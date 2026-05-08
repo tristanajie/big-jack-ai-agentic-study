@@ -9,5 +9,12 @@ class QuizRequest(BaseModel):
 
 @router.post("/quiz")
 def quiz(req: QuizRequest):
-    result = generate_quiz(req.text)
-    return {"quiz": result}
+    if not req.text:
+        return {"error": "Text cannot be empty"}
+    
+    try:
+        result = generate_quiz(req.text)
+        return {"quiz": result}
+    except Exception as e:
+        print(f"❌ Quiz Error: {str(e)}")
+        return {"error": f"Failed to generate quiz: {str(e)}", "quiz": None}
